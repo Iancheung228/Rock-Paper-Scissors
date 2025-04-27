@@ -1,4 +1,4 @@
-// console.log("Hello World")
+// console.log("Hello World") 
 
 const resultsDiv = document.querySelector("#results");
 const runningScoreDiv = document.querySelector("#runningScore");
