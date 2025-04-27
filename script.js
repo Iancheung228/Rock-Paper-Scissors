@@ -1,12 +1,14 @@
 // console.log("Hello World") 
 
-const resultsDiv = document.querySelector("#results");
-const runningScoreDiv = document.querySelector("#runningScore");
+const resultsDiv = document.querySelector("#results"); // result of each single game
+const runningScoreDiv = document.querySelector("#runningScore"); // running score of games played
+const announceWinner = document.querySelector("#annnounceWinner");
 const rock_Button = document.querySelector("#rock_Button");
 const scissors_Button = document.querySelector("#scissors_Button");
 const paper_Button = document.querySelector("#paper_Button");
  
 
+// uses 1. and 2.
 rock_Button.addEventListener("click", function() {
     //alert("Human chose Rock!");
     const computerSelection = getComputerChoice(); 
@@ -14,17 +16,16 @@ rock_Button.addEventListener("click", function() {
   });
 
   scissors_Button.addEventListener("click", function() {
-    //alert("Human chose Scissors!");
     const computerSelection = getComputerChoice(); 
     playRound("scissors", computerSelection)
   });
 
   paper_Button.addEventListener("click", function() {
-    //alert("Human chose Paper!");
     const computerSelection = getComputerChoice(); 
     playRound("paper", computerSelection)
   });
 
+  // 1.
 function getComputerChoice() {
     let num  = Math.random() 
     if (num <= 0.33){
@@ -42,9 +43,9 @@ function getComputerChoice() {
 }
 
 
-
-
+// 2.
 function playRound(humanChoice, computerChoice) {
+    numGames += 1;
     if (
        (humanChoice === "rock" && computerChoice === "scissors") ||
        (humanChoice === "scissors" && computerChoice === "paper") ||
@@ -67,11 +68,26 @@ function playRound(humanChoice, computerChoice) {
      }
      //console.log({humanScore,computerScore})
      runningScoreDiv.textContent= `Human: ${humanScore} | Computer: ${computerScore}`;
+
+     // NEW CODE to declare winner and disable buttons
+     if (humanScore === 5 || computerScore === 5) {
+        if (humanScore === 5) {
+            announceWinner.textContent = "Human wins the game!";
+        } else {
+            announceWinner.textContent = "Computer wins the game!";
+        }
+        // Disable buttons after either side reached 5 points
+        rock_Button.disabled = true;
+        paper_Button.disabled = true;
+        scissors_Button.disabled = true;
+    }
+
      return {humanScore,computerScore};
 }
 
 let humanScore = 0 ;
 let computerScore = 0 ;
+let numGames = 0 ;
 
 
 function playGame(){
